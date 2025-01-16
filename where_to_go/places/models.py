@@ -17,25 +17,19 @@ class Place(models.Model):
 
 
 class Image(models.Model):
-    ORDER_CHOICES = [
-        ('1', 'Первая'),
-        ('2', 'Вторая')
-    ]
     place = models.ForeignKey(
         Place,
         on_delete=models.DO_NOTHING,
+        related_name='images',
         verbose_name='Локация',
         null=True,
         blank=True
     )
     image = models.ImageField()
-    order = models.CharField(
-        max_length=1,
-        choices=ORDER_CHOICES,
-        default='2'
-    )
+    order = models.IntegerField()
 
     class Meta:
+        ordering = ['order']
         verbose_name = 'картинка'
         verbose_name_plural = 'картинки'
     
