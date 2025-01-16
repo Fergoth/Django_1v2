@@ -6,6 +6,7 @@ from places.models import Place, Image
 class PlaceAdmin(admin.ModelAdmin):
     pass
 
+
 @admin.register(Image)
 class ImageAdmin(admin.ModelAdmin):
     pass
