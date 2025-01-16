@@ -11,16 +11,33 @@ class Place(models.Model):
     class Meta:
         verbose_name = 'место'
         verbose_name_plural = 'места'
-    
+
     def __str__(self):
         return self.title
 
 
-"""class Image(models.Model):
+class Image(models.Model):
+    ORDER_CHOICES = [
+        ('1', 'Первая'),
+        ('2', 'Вторая')
+    ]
     place = models.ForeignKey(
         Place,
         on_delete=models.DO_NOTHING,
         verbose_name='Локация',
         null=True,
         blank=True
-    )"""
+    )
+    image = models.ImageField()
+    order = models.CharField(
+        max_length=1,
+        choices=ORDER_CHOICES,
+        default='2'
+    )
+
+    class Meta:
+        verbose_name = 'картинка'
+        verbose_name_plural = 'картинки'
+    
+    def __str__(self):
+        return f"{self.order} {self.place.title}"
