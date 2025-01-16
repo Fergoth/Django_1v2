@@ -32,6 +32,6 @@ class Image(models.Model):
         ordering = ['order']
         verbose_name = 'картинка'
         verbose_name_plural = 'картинки'
-    
+
     def __str__(self):
         return f"{self.order} {self.place.title}"

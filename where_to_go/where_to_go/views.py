@@ -1,32 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, JsonResponse
+from django.urls import reverse
 from places.models import Place
-
-
-def show_main(request):
-
-    places = Place.objects.all()
-    places = {
-        "type": "FeatureCollection",
-        "features": [
-            {
-                "type": "Feature",
-                "geometry": {
-                    "type": "Point",
-                    "coordinates": [place.longitude, place.latitude]
-                },
-                "properties":
-                {
-                    "title": place.title,
-                    "placeId": place.id,
-                    "detailsUrl": ""
-                }
-            }
-            for place in places
-        ]
-    }
-    return render(request, 'index.html', context={'places': places})
-
 
 def place_details(request, place_id):
     place_queryset = Place.objects.prefetch_related('images')
@@ -48,3 +23,28 @@ def place_details(request, place_id):
             'indent': 4
         }
     )
+
+
+def show_main(request):
+
+    places = Place.objects.all()
+    places = {
+        "type": "FeatureCollection",
+        "features": [
+            {
+                "type": "Feature",
+                "geometry": {
+                    "type": "Point",
+                    "coordinates": [place.longitude, place.latitude]
+                },
+                "properties":
+                {
+                    "title": place.title,
+                    "placeId": place.id,
+                    "detailsUrl": reverse(place_details, args=[place.id])
+                }
+            }
+            for place in places
+        ]
+    }
+    return render(request, 'index.html', context={'places': places})
