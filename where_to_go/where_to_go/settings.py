@@ -11,7 +11,12 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
+from environs import Env
 
+env = Env()
+env.read_env()
+
+ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', [])
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -20,12 +25,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'REPLACE_ME'
+SECRET_KEY = env.str('SECRET_KEY', 'REPLACE_ME')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-ALLOWED_HOSTS = ['127.0.0.1',]
+DEBUG = env.bool('DEBUG', True)
 
 
 # Application definition
@@ -54,10 +57,11 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'where_to_go.urls'
 
+TEPLATE_DIR = Path(BASE_DIR, 'templates')
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [Path(BASE_DIR, 'templates')],
+        'DIRS': [TEPLATE_DIR],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -79,7 +83,9 @@ WSGI_APPLICATION = 'where_to_go.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME': env.str(
+            'DATABASE_FILEPATH', BASE_DIR / 'db.sqlite3'
+            )
     }
 }
 
@@ -118,8 +124,11 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
+STATIC_ROOT = ''
 STATIC_URL = 'static/'
-STATICFILES_DIRS = (Path(BASE_DIR, "static"), )
+STATICFILES_DIRS = [
+    Path(BASE_DIR, "static"),
+]
 
 MEDIA_ROOT = Path(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
