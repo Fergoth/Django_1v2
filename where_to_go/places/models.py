@@ -27,6 +27,7 @@ class Image(models.Model):
     )
     image = models.ImageField()
     order = models.PositiveIntegerField(
+        db_index=True,
         default=0,
         blank=False,
         null=False
