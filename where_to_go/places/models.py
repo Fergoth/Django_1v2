@@ -26,7 +26,11 @@ class Image(models.Model):
         blank=True
     )
     image = models.ImageField()
-    order = models.IntegerField()
+    order = models.PositiveIntegerField(
+        default=0,
+        blank=False,
+        null=False
+    )
 
     class Meta:
         ordering = ['order']
