@@ -17,10 +17,10 @@ class Place(models.Model):
         return self.title
 
 
-class Image(models.Model):
+class PlaceImage(models.Model):
     place = models.ForeignKey(
         Place,
-        on_delete=models.DO_NOTHING,
+        on_delete=models.CASCADE,
         related_name='images',
         verbose_name='Локация',
         null=True,
