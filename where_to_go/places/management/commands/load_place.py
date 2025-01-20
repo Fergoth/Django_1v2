@@ -1,9 +1,11 @@
-from django.core.management.base import BaseCommand
-import requests
-from places.models import Place, PlaceImage
-from django.core.files.base import ContentFile
 import os
 from urllib.parse import urlparse
+
+import requests
+from django.core.files.base import ContentFile
+from django.core.management.base import BaseCommand
+
+from places.models import Place, PlaceImage
 
 
 def save_image(place, url):
