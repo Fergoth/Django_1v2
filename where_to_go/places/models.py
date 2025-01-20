@@ -3,11 +3,11 @@ from tinymce.models import HTMLField
 
 
 class Place(models.Model):
-    title = models.CharField("Заголовок", max_length=200)
-    short_description = models.TextField("Краткое описание", blank=True)
-    long_description = HTMLField("Полное описание", blank=True)
-    latitude = models.DecimalField("Широта", max_digits=9, decimal_places=6)
-    longitude = models.DecimalField("Долгота", max_digits=9, decimal_places=6)
+    title = models.CharField('Заголовок', max_length=200)
+    short_description = models.TextField('Краткое описание', blank=True)
+    long_description = HTMLField('Полное описание', blank=True)
+    latitude = models.DecimalField('Широта', max_digits=9, decimal_places=6)
+    longitude = models.DecimalField('Долгота', max_digits=9, decimal_places=6)
 
     class Meta:
         verbose_name = 'место'
@@ -39,4 +39,4 @@ class PlaceImage(models.Model):
         verbose_name_plural = 'картинки'
 
     def __str__(self):
-        return f"{self.order} {self.place.title}"
+        return f'{self.order} {self.place.title}'

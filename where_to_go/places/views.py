@@ -31,19 +31,19 @@ def show_main(request):
 
     places = Place.objects.all()
     places = {
-        "type": "FeatureCollection",
-        "features": [
+        'type': 'FeatureCollection',
+        'features': [
             {
-                "type": "Feature",
-                "geometry": {
-                    "type": "Point",
-                    "coordinates": [place.longitude, place.latitude]
+                'type': 'Feature',
+                'geometry': {
+                    'type': 'Point',
+                    'coordinates': [place.longitude, place.latitude]
                 },
-                "properties":
+                'properties':
                 {
-                    "title": place.title,
-                    "placeId": place.id,
-                    "detailsUrl": reverse(place_details, args=[place.id])
+                    'title': place.title,
+                    'placeId': place.id,
+                    'detailsUrl': reverse(place_details, args=[place.id])
                 }
             }
             for place in places
