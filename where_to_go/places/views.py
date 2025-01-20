@@ -28,8 +28,7 @@ def place_details(request, place_id):
 
 
 def show_main(request):
-
-    places = Place.objects.all()
+    places_queryset = Place.objects.all()
     places = {
         'type': 'FeatureCollection',
         'features': [
@@ -43,10 +42,10 @@ def show_main(request):
                 {
                     'title': place.title,
                     'placeId': place.id,
-                    'detailsUrl': reverse(place_details, args=[place.id])
+                    'detailsUrl': reverse('place-details', args=[place.id])
                 }
             }
-            for place in places
+            for place in places_queryset
         ]
     }
     return render(request, 'index.html', context={'places': places})
