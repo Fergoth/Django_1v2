@@ -1,7 +1,9 @@
 # Куда пойти — Москва глазами Туриста
 Сайт о самых интересных местах в Москве
-[Ссылка на сайт] (https://fergoth.pythonanywhere.com/)
-[Ссылка на админку] (https://fergoth.pythonanywhere.com/admin)
+
+[Ссылка на сайт](https://fergoth.pythonanywhere.com/)
+
+[Ссылка на админку](https://fergoth.pythonanywhere.com/admin)
 ## Запуск
 Для запуска понадобится Python версии 3.10
 * Скачайте код
@@ -59,5 +61,5 @@ python manage.py load_place URL
 ## Цели
 Код написан в учебных целях — это урок в курсе по Python и веб-разработке на сайте [Devman](https://dvmn.org).
 
-Тестовые данные взяты с [репозитория]  (https://github.com/devmanorg/where-to-go-places)
+Тестовые данные взяты с [репозитория](https://github.com/devmanorg/where-to-go-places)
 
