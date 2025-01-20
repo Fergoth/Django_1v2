@@ -17,19 +17,14 @@ class ImageInline(SortableStackedInline):
 
     def preview(self, obj):
         max_height = 200
-        if obj.image.height >= max_height:
-            height = max_height
-            width = int(obj.image.width * (max_height/obj.image.height))
-        else:
-            height = obj.image.height
-            width = obj.image.width
+        max_width = 200
         return format_html(
-            '<img src="{url}" width="{width}" height={height} />'.
-            format(
-                url=obj.image.url,
-                width=width,
-                height=height,
-            )
+            '<img src="{}" width="{}" height={} style="max-height: {}px; max-width: {}px;" />',  # noqa: E501
+            obj.image.url,
+            obj.image.width,
+            obj.image.height,
+            max_height,
+            max_width
         )
 
 
