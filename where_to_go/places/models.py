@@ -26,8 +26,9 @@ class PlaceImage(models.Model):
         null=True,
         blank=True
     )
-    image = models.ImageField()
+    image = models.ImageField('Файл картинки')
     order = models.PositiveIntegerField(
+        verbose_name='Порядковый номер',
         db_index=True,
         default=0,
         blank=False,
