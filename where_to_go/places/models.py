@@ -22,9 +22,7 @@ class PlaceImage(models.Model):
         Place,
         on_delete=models.CASCADE,
         related_name='images',
-        verbose_name='Локация',
-        null=True,
-        blank=True
+        verbose_name='Локация'
     )
     image = models.ImageField('Файл картинки')
     order = models.PositiveIntegerField(
