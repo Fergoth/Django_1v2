@@ -41,8 +41,8 @@ class Command(BaseCommand):
             place_raw = response.json()
             title = place_raw['title']
             image_urls = place_raw['imgs']
-            short_description = place_raw['short_description']
-            long_description = place_raw['long_description']
+            short_description = place_raw['description_short']
+            long_description = place_raw['description_long']
             lng = place_raw['coordinates']['lng']
             lat = place_raw['coordinates']['lat']
         except KeyError as e:
