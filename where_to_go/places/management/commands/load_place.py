@@ -41,8 +41,8 @@ class Command(BaseCommand):
             js = r.json()
             title = js['title']
             image_urls = js['imgs']
-            description_short = js['description_short']
-            description_long = js['description_long']
+            short_description = js['short_description']
+            long_description = js['long_description']
             lng = js['coordinates']['lng']
             lat = js['coordinates']['lat']
         except KeyError as e:
@@ -52,8 +52,8 @@ class Command(BaseCommand):
             print('По ссылке находится не json файл')
         place, created = Place.objects.get_or_create(
             title=title,
-            description_long=description_long,
-            description_short=description_short,
+            long_description=long_description,
+            short_description=short_description,
             longitude=lng,
             latitude=lat
         )
