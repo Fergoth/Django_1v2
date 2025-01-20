@@ -32,19 +32,19 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         url = options['url']
         try:
-            r = requests.get(url)
-            r.raise_for_status()
+            response = requests.get(url)
+            response.raise_for_status()
         except requests.exceptions.HTTPError as err:
             print('Проблемы с загрузкой данных по url', err)
             return
         try:
-            js = r.json()
-            title = js['title']
-            image_urls = js['imgs']
-            short_description = js['short_description']
-            long_description = js['long_description']
-            lng = js['coordinates']['lng']
-            lat = js['coordinates']['lat']
+            place_raw = response.json()
+            title = place_raw['title']
+            image_urls = place_raw['imgs']
+            short_description = place_raw['short_description']
+            long_description = place_raw['long_description']
+            lng = place_raw['coordinates']['lng']
+            lat = place_raw['coordinates']['lat']
         except KeyError as e:
             print('Некорректный формат json', e)
             return
