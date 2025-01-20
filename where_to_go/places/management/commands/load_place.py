@@ -16,11 +16,11 @@ def save_image(place, url):
     except requests.exceptions.HTTPError as err:
         print(f'Проблемы с загрузкой данных по {url}', err)
         return
-    imagefile = ContentFile(response.content)
-    obj = PlaceImage.objects.create(
-        place=place
+    imagefile = ContentFile(response.content, filename)
+    PlaceImage.objects.create(
+        place=place,
+        image=imagefile
     )
-    obj.image.save(filename, imagefile, save=True)
 
 
 class Command(BaseCommand):
@@ -52,10 +52,12 @@ class Command(BaseCommand):
             print('По ссылке находится не json файл')
         place, created = Place.objects.get_or_create(
             title=title,
-            long_description=long_description,
-            short_description=short_description,
-            longitude=lng,
-            latitude=lat
+            defaults={
+                'long_description': long_description,
+                'short_description': short_description,
+                'longitude': lng,
+                'latitude': lat
+            }
         )
         if created:
             print('Сохранена локация, сохраняем фотографии..')
